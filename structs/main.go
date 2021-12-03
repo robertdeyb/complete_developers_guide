@@ -10,26 +10,30 @@ type contactInfo struct {
 type person struct {
 	firstName string
 	lastName  string
-	contact   contactInfo
+	contactInfo
 }
 
 func main() {
 	jim := person{
 		firstName: "Jim",
 		lastName:  "Party",
-		contact: contactInfo{
+		contactInfo: contactInfo{
 			email:   "jim@gmail.com",
 			zipCode: 94000,
 		},
 	}
+	jim.updateName("jimmy")
+	jim.print()
 
-	fmt.Printf("%+v", jim)
 }
 
-// func (p person) updateName(newFirstName string) {
+//*person is a type description that means it can only receive of a type person
+func (pointerToPerson *person) updateName(newFirstName string) {
+	//manipulate the value the pointer is referencing
+	//take this memory address and point it to the person and turn it on the actual valuey
+	(*pointerToPerson).firstName = newFirstName
+}
 
-// }
-
-// func (p person) updateName(newFirstName string) {
-
-// }
+func (p person) print() {
+	fmt.Printf("%+v", p)
+}
